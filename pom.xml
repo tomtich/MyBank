@@ -1,0 +1,212 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.banking</groupId>
+	<artifactId>Bank</artifactId>
+	<packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Bank Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+   <properties>
+		<spring.version>4.3.3.RELEASE</spring.version>
+			<spring.security.version>3.2.5.RELEASE</spring.security.version>
+	</properties>
+  
+  <dependencies>
+     
+      <!-- below three dependency are for spring core module -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- to use spring jdbc in the project we have to below dependency -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		   <!-- Below jars are used to develop spring mvc application -->
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		
+		<!-- This  jar is responsible for spring and hibernate integration...................... -->
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+	        <!-- Using AOP with aspectJ -->
+                   <dependency>
+                             <groupId>org.aspectj</groupId>
+                             <artifactId>aspectjrt</artifactId>
+                             <version>1.6.11</version>
+                   </dependency>
+ 
+                   <dependency>
+                             <groupId>org.aspectj</groupId>
+                             <artifactId>aspectjweaver</artifactId>
+                             <version>1.6.11</version>
+                   </dependency>
+		
+		
+		
+		<!-- I am adding Hibernate dependencies -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.5.Final</version>
+		</dependency>
+
+	<!-- EHCache Core APIs -->
+		
+		<dependency>
+        <groupId>net.sf.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>2.8.3</version>
+    </dependency>
+    
+		<!-- Hibernate EHCache API -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>4.3.5.Final</version>
+		</dependency>
+		<!-- EHCache uses slf4j for logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		
+		<dependency>
+   	 <groupId>javax.servlet</groupId>
+   	 <artifactId>javax.servlet-api</artifactId>
+   	 <version>3.1.0</version>
+   	 <scope>provided</scope>
+	</dependency>
+	
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+    </dependency>
+    
+    
+				<!-- MySQL database driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.9</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Below two jar we need to uploade image into the  database -->
+         <dependency>
+                   <groupId>commons-fileupload</groupId>
+                   <artifactId>commons-fileupload</artifactId>
+                   <version>1.2.2</version>
+          </dependency>
+           
+          <dependency>
+                   <groupId>commons-io</groupId>
+                   <artifactId>commons-io</artifactId>
+                   <version>1.3.2</version>
+          </dependency>
+          
+          	 <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+	<!-- 	<dependency>
+    			<groupId>com.google.code.gson</groupId>
+    			<artifactId>gson</artifactId>
+    			<version>2.8.0</version>
+		</dependency> -->
+		
+		  	<!-- Used to generate JSON response -->
+		<!-- Used to generate JSON response -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			 <version>2.8.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			 <version>2.8.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			 <version>2.8.1</version>
+		</dependency>
+        
+          
+        <!--   <dependency>
+		<groupId>net.sf.ehcache</groupId>
+		<artifactId>ehcache</artifactId>
+		<version>2.9.0</version>
+	</dependency>
+
+        Optional, to log stuff
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+		<version>1.0.13</version>
+	</dependency> -->
+		
+		
+  </dependencies>
+  	<build>
+		<finalName>Bank</finalName>
+		</build>
+</project>
