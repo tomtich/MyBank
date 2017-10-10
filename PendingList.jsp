@@ -15,8 +15,9 @@
 </script>
 <script type="text/javascript">
 	var contents = "";
+	
+	// This call is used to manage the Show list button
 	$(document).ready(function() {
-
 		$("#search").click(function() {
 			var purl = contextPath + "/customers";
 			$.ajax({
@@ -24,8 +25,8 @@
 				success : function(jsonData) {
 					contents = "";
 					for (var x = 0; x < jsonData.length; x++) {
-						addOneResult(jsonData[x], x);
-						hideRecord(x);
+						addOneCustomer(jsonData[x], x);
+						hideTable(x);
 					}
 					$("#searchResult").html(contents);
 				}
@@ -33,23 +34,18 @@
 		}); //end of the click event
 	}); //end of ready handler
 
-	function hideRecord(id) {
+	
+	// This function is used to hide the customer information detail
+	function hideTable(id) {
 		$("#table" + id).hide();
 	}
 
-	function showRecord(id) {
+	// This function is used to show the customer information detail
+	function showTable(id) {
 		$("#table" + id).show();
 	}
-
-	function hidePending(id) {
-		$("#mydiv" + id).hide();
-	}
-
-	function rejectPending(id) {
-		$("#mydiv" + id).hide();
-	}
-
-	function deleteRecord(id) {
+         //this function is used to delete a record
+		/* function deleteRecord(id) {
 		//https://stackoverflow.com/questions/2153917/how-to-send-a-put-delete-request-in-jquery
 		var purl = contextPath + "/" + id;
 		$
@@ -62,19 +58,58 @@
 						if (jsonData.status == "success") {
 							$("#mydiv" + id).hide();
 						} else {
-							alert("Sorry! data could not be deleted......................................................................");
+							alert("Sorry! data could not be deleted");
 						}
 					}
 				});
+	} */
+
+	// This function is used to change status of customer from Pending status to Accepted status
+	function acceptedRecord(id) {
+		//https://stackoverflow.com/questions/2153917/how-to-send-a-put-delete-request-in-jquery
+		var purl = "http://localhost:8080/Bank/acceptCustomer/" + id;
+		$.ajax({
+			url : purl,
+			type : 'PUT',
+			success : function(jsonData) { //data= this.responseText
+				//data is JavaScript object against JSON response coming fromm the server
+				console.log("jsonData.status" + jsonData.status);
+				if (jsonData.status == "success") {
+					$("#mydiv" + id).hide();
+				} else {
+					alert("Sorry! data could not be deleted");
+				}
+			}
+		});
 	}
 
-	function addOneResult(srow, index) {
+	// This function is used to change status of customer from Pending status to Rejected status
+	function rejectedRecord(id) {
+		//https://stackoverflow.com/questions/2153917/how-to-send-a-put-delete-request-in-jquery
+		var purl = contextPath + "/rejectCustomer/" + id;
+		$.ajax({
+			url : purl,
+			type : 'PUT',
+			success : function(jsonData) { //data= this.responseText
+				//data is JavaScript object against JSON response coming fromm the server
+				console.log("jsonData.status" + jsonData.status);
+				if (jsonData.status == "success") {
+					$("#mydiv" + id).hide();
+				} else {
+					alert("Sorry! data could not be deleted");
+				}
+			}
+		});
+	}
+    
+	// This function is used to add new Customer to list
+	function addOneCustomer(srow, index) {
 		contents = contents
 				+ '<div id = "mydiv'+ srow.id + '"><h4 style = "color:#4000ff;">Request #'
 				+ srow.id
-				+ '<a href="javascript:showRecord('
+				+ '<a href="javascript:showTable('
 				+ srow.id
-				+ ')"><img src="img/show.png" height="30px;"/><a href="javascript:hideRecord('
+				+ ')"><img src="img/show.png" height="30px;"/><a href="javascript:hideTable('
 				+ srow.id
 				+ ')"><img src="img/hide.png" height="30px;"/> </h4><br><br><table class="table" style="width: 80%; display:none;"  id="table'
 				+ srow.id + '">';
@@ -112,11 +147,11 @@
 		contents = contents + '<td><div class="form-group">';
 		contents = contents + '<form name="pendingList">';
 		contents = contents
-				+ '<button type="button" class="btn btn-primary" onclick = "hidePending('
+				+ '<button type="button" class="btn btn-primary" onclick = "acceptedRecord('
 				+ srow.id
 				+ ')" style="display: inline;margin-left: 30px;" id="accept">Accept</button>';
 		contents = contents
-				+ '<button type="button" class="btn btn-primary" onclick = "deleteRecord('
+				+ '<button type="button" class="btn btn-primary" onclick = "rejectedRecord('
 				+ srow.id
 				+ ')" style="display: inline;margin-left: 40px;" id="reject">Reject</button>';
 		contents = contents + '</form>';
